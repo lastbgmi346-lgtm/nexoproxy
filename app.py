@@ -34,6 +34,12 @@ def save_config(data):
     with open(CONFIG_FILE, 'w') as f:
         json.dump(data, f, indent=4)
 
+# ✅ YEH NAYA ROUTE ADD KAREIN (Root URL ke liye)
+@app.route('/')
+def home():
+    return "NIKU MODS Proxy Server is Running! Use /api/config endpoint."
+
+# API endpoint
 @app.route('/api/config', methods=['GET', 'POST'])
 def handle_config():
     if request.method == 'GET':
