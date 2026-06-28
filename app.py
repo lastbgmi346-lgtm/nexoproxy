@@ -4,10 +4,8 @@ import os
 
 app = Flask(__name__)
 
-# Config file ka naam
 CONFIG_FILE = "config.json"
 
-# Default config (pehli baar jab file na ho)
 DEFAULT_CONFIG = {
     "BACKJUMPV1": True,
     "BYPASSV1": True,
@@ -23,41 +21,33 @@ DEFAULT_CONFIG = {
 }
 
 def load_config():
-    """Config file se data load karein"""
     if os.path.exists(CONFIG_FILE):
         with open(CONFIG_FILE, 'r') as f:
             return json.load(f)
     return DEFAULT_CONFIG
 
 def save_config(data):
-    """Config file mein data save karein"""
     with open(CONFIG_FILE, 'w') as f:
         json.dump(data, f, indent=4)
 
-# ✅ YEH NAYA ROUTE ADD KAREIN (Root URL ke liye)
+# ✅ ROOT ROUTE - Ab JSON config return karega
 @app.route('/')
 def home():
-    return "NIKU MODS Proxy Server is Running! Use /api/config endpoint."
+    config = load_config()
+    return jsonify(config)  # Direct JSON
 
-# API endpoint
+# API endpoint (extra rakh sakte ho)
 @app.route('/api/config', methods=['GET', 'POST'])
 def handle_config():
     if request.method == 'GET':
-        # Current config return karein
         config = load_config()
         return jsonify(config)
-    
     elif request.method == 'POST':
-        # Naya config save karein
         new_config = request.get_json()
         if new_config is None:
             return jsonify({"error": "Invalid JSON"}), 400
-        
-        # Pehle purana config load karein
         current_config = load_config()
-        # Update karein with new values
         current_config.update(new_config)
-        # Save karein
         save_config(current_config)
         return jsonify({"status": "success", "config": current_config})
 
