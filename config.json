@@ -1,1 +1,13 @@
-{"BACKJUMPV1":true,"BYPASSV1":true,"HIGH_FPS":false,"HIGH_JUMP":true,"HIGH_SENSI":false,"HS_CHEST":true,"HS_NECK":false,"NO_CD_MICS":false,"NO_SWAP":true,"RAPID_FIRE":true,"SPEED_HACK":false}
+{
+    "BACKJUMPV1": true,
+    "BYPASSV1": true,
+    "HIGH_FPS": true,
+    "HIGH_JUMP": true,
+    "HIGH_SENSI": true,
+    "HS_CHEST": true,
+    "HS_NECK": true,
+    "NO_CD_MICS": true,
+    "NO_SWAP": true,
+    "RAPID_FIRE": true,
+    "SPEED_HACK": true
+}
